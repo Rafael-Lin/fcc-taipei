@@ -10,8 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.12.4",
-    "http-status": "^0.2.0",
-    "mongoose": "^4.2.6",
-    "wagner-core": "^0.1.0"
+    "mongodb": "2.0.35"
   }
 }

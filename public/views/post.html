@@ -1,0 +1,73 @@
+  <div class="wrapper ts">
+    <h2 class="page-subject ts">Message Board</h2>    
+    
+    <form role="form" ng-submit="addPost()">
+      
+      <label for="msg-subject">SUBJECT</label>
+      
+      <input type="text" id="msg-subject" placeholder="title" class="ts" required ng-model="member.title">
+      
+      <textarea name="" id="" cols="30" rows="10" placeholder="Write here &#9786;" required ng-model="member.body"></textarea>
+      
+      <span class="input-group-btn">
+        <input type="submit" value="Post" class="btn btn-primary">
+      </span>
+    
+    <!--<a href="" role="submit" class="msg-post ts">&#9998; post</a>-->
+    </form>  
+    
+    
+    <article class="msg-content" ng-repeat="post in posts | orderBy: '-order'">
+      <h2 class="sr">post-articles</h2>
+      <section class="post-content">
+        <span class="post-num">#{{$index + 1}}</span>
+        <i class="material-icons ts">account_circle</i>
+        <h2 class="fcc-username ts">      
+          {{ post.name }}
+        </h2>
+        
+        <!--<form ng-submit="editPost(post._id)">-->
+        <!--  <input type="text" ng-model="post.title"/>-->
+        <!--  <input type="text" ng-model="post.body"/>-->
+        <!--  <input type="submit" value="Submit"/>-->
+        <!--</form>-->
+        
+        <button ng-click="deletePost(post._id)">Delete</button>
+        <button><a href="#/edit/{{post._id}}">Edit</a></button>
+        
+        <h3 class="post-title">{{ post.title }}</h3>
+        
+        <div class="post-date">{{ post.date }}</div>
+        
+        <p class="post-paragraph">{{ post.body }}</p>
+        
+        <ul class="tool-bar cf">
+          <li class="post-comment"><i class="fa fa-commenting-o"></i>4</li>
+          <li class="thumb"><i class="material-icons active">thumb_down</i>1</li>
+          <li class="thumb"><i class="material-icons">thumb_up</i>10</li>
+        </ul>
+        
+        <ul class="post-content-reply">
+          <li class="" ng-repeat="reply in member.replies | orderBy: -postTime">
+            <section class="post-content">
+              <i class="material-icons ts">account_circle</i>
+              <h2 class="fcc-username ts">{{ reply.name }}</h2>
+
+              <div class="post-date">2015/11/08</div>
+              <p class="post-paragraph">{{ reply.body }}</p>
+              
+              <ul class="tool-bar cf">
+                <li class="thumb"><i class="material-icons">thumb_down</i>1</li>
+                <li class="thumb"><i class="material-icons">thumb_up</i>910</li>
+              </ul>              
+            </section>
+          </li>
+        </ul>
+        
+      </section> 
+      
+    </article> <!--[end] msg-content-->
+    
+    <div style="height:100px; background-color:#eee;"></div>
+    
+  </div> <!--[end] wrapper-->

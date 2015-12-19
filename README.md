@@ -1,5 +1,7 @@
 ## Free Code Camp  - Taipei community project 1.0
 
+[![Join the chat at https://gitter.im/Beltayn/fcc-taipei](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Beltayn/fcc-taipei?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This is a community project by members of Free Code Camp, Taipei. The objective of this project is for all team members to gain experience working in a collaborative environment with github.
 We will be creating a simple webapp which has a one page user interface page.
 The page can accept text which is then submitted to the server and stored in a mongodb database.  Each message that has been submitted will be echoed on the page immediately after submission along with all previous messages.
@@ -30,3 +32,4 @@ Please add your name and what you contributed in this file - this is an exercise
 - Jack Chang (aka jkaichang) - Sever backend and database. 
 - Tzu-Yu Chen (wesley) - Frontend Web Design
 - Rafael Lin - Interested in BackEnd technical skill.
+- Shian (chuah48263) - Wanna learn about ReactJS and participate in backend development.
