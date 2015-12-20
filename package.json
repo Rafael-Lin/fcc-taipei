@@ -1,5 +1,6 @@
 {
   "name": "beginner-app",
+  "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -12,6 +13,9 @@
     "express": "^4.12.4",
     "http-status": "^0.2.0",
     "mongoose": "^4.2.6",
+    "mongoose": "^4.2.6",
+    "mongodb":"*",
+    "body-parser" :"*",
     "wagner-core": "^0.1.0"
   }
 }
