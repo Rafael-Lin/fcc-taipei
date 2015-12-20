@@ -8,7 +8,6 @@ function inputHandler (db) {
     var self = this;
 
     this.getPosts = function (req, res) {
-        // var projection = { '_id': false };
         console.log(self);
         var projection = {};
 
@@ -38,8 +37,6 @@ function inputHandler (db) {
     this.post = function(req, res){
         console.log("posting");
         req.on('data', function(data) {
-            // console.log(typeof data);
-            //console.log(JSON.stringify(data.body));
             var record = {};
             data = JSON.parse(data);
             console.log( " insert " + data);
@@ -131,8 +128,6 @@ function inputHandler (db) {
         res.writeHead(200);
         res.end();
     };
-
-
 }
 
 module.exports = inputHandler;

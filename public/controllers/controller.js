@@ -3,6 +3,7 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
     var apiUrl = '/api/posts';
     var UpdateLikesUrl = '/api/post/';
     var UpdateUnLikesUrl = '/api/postUnLikes/';
+    $scope.username = "unknown" ;
 
     $scope.getPost = function() {
         // current unused

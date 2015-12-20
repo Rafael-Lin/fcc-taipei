@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>freecodecamp message board</title>
-  <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="/public/css/main.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- AngularJS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular-route.min.js"></script>
-  <script src="/public/main.js"></script>
-  <script src="/public/controllers/controller.js"></script>
-</head>
-<body ng-app="myApp">
-        <nav class="navbar navbar-default navbar-fixed-top navheader">
-            <div class="container">
-                <div class="navbar-header navheader ">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar">
-                        </span>
-                    </button>
-                    <a class="navbar-brand" href="https://www.facebook.com/groups/free.code.camp.taipei/">
-<img src="https://s3.amazonaws.com/freecodecamp/freecodecamp_logo.svg" alt="learn to code javascript at Free Code Camp logo" class="img-responsive nav-logo">
-                      </a>
-                      <a class="navbar-brand" href="/">Taipei</a>
-                </div>
-                <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                      <li ><a href="#" class="navItem">Sign Up </a></li>
-                      <li class="navItem"><a href="#">User Name </a></li>
-                    </ul>
-                </div><!--/.nav-collapse -->
-            </div>
-        </nav>
-  
- <div ng-view></div>
-  <!-- <i class="material-icons goto-top">publish</i> -->  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>freecodecamp message board</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/public/css/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.10/angular-route.min.js"></script>
+    <script src="/public/main.js"></script>
+    <script src="/public/controllers/controller.js"></script>
+  </head>
+  <body ng-app="myApp">
+    <nav class="navbar navbar-default navbar-fixed-top navheader">
+      <div class="container">
+        <div class="navbar-header navheader ">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar">
+            </span>
+          </button>
+          <a class="navbar-brand" href="https://www.facebook.com/groups/free.code.camp.taipei/">
+            <img src="https://s3.amazonaws.com/freecodecamp/freecodecamp_logo.svg" alt="learn to code javascript at Free Code Camp logo" class="img-responsive nav-logo">
+          </a>
+          <a class="navbar-brand" href="/"><sup>Taipei</sup></a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li ><a href="/login" class="navItem">Sign Up </a></li>
+            <li class="navItem"><a href="/profile" ng-model="username">User Name </a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
 
-</body>
+    <div ng-view></div>
+    <!-- <i class="material-icons goto-top">publish</i> -->  
+
+  </body>
 </html>

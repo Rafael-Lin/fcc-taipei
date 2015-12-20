@@ -4,7 +4,7 @@
     var submitBtn = document.querySelector('#submitBtn');
     var postsList = document.querySelector('#postsList');
     var textInputBox = document.querySelector('#inputText');
-    var apiUrl = 'https://fcc-taipei-beltayn.c9.io/api/posts';
+    // var apiUrl = 'https://fcc-taipei-beltayn.c9.io/api/posts';
 
     submitBtn.addEventListener('click', function() {
         ajaxRequest('POST', apiUrl, function() {
