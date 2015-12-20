@@ -58,10 +58,7 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
         console.log( "run update likes" + tmpApiUrl ) ; 
         $http.put( tmpApiUrl, { id : id , likes : likes } )
             .success(function() {
-                // window.location.href = '/';
-                // console.log( "add successfully and then" ) ;
-                // console.log( res ) ;
-                window.location.href = '/';
+                getPosts();
             });
     };
 
@@ -70,7 +67,7 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
         console.log( "run update likes" + tmpApiUrl ) ; 
         $http.put( tmpApiUrl, { id : id , unlikes : unlikes } )
             .success(function( ) {
-                window.location.href = '/';
+                getPosts();
             });
     };
 

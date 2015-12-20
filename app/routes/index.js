@@ -27,7 +27,7 @@ module.exports = function(app, db) {
   app.route('/api/post/:id')
             .put(inputHandler.updateLikes);
 
-  // app.route('/api/postUnLikes/:id')
-  //           .put(inputHandler.updateUnLikes);
+  app.route('/api/postUnLikes/:id')
+            .put(inputHandler.updateUnLikes);
     
 };
