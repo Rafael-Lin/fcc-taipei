@@ -1,19 +1,29 @@
+var myApp = angular.module('myApp', ['ngRoute', 'ngResource']);
+
+myApp.config(function($routeProvider) {
+    $routeProvider.when('/', {
+        controller: 'MainCtrl',
+        templateUrl: '/public/views/post.html'
+    })
+    .when('/edit/:id', {
+        controller: 'MainCtrl',
+        templateUrl: '/public/views/edit.html'
+    })
+    .when('/profile', {
+        controller: 'MainCtrl',
+        templateUrl: '/public/views/profile.html'
+    })
+    .otherwise({
+        redirectTo: '/'
+    });
+});
+
 myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
 
     var apiUrl = '/api/posts';
     var UpdateLikesUrl = '/api/post/';
     var UpdateUnLikesUrl = '/api/postUnLikes/';
     $scope.username = "unknown" ;
-
-    $scope.getPost = function() {
-        // current unused
-        var id = $routeParams.id;
-        console.log('https://demo-project-larry0220-1.c9.io/api/edit/' + id);
-        $http.get('https://demo-project-larry0220-1.c9.io/api/edit/' + id)
-            .success(function(response) {
-                $scope.member = response[0];
-            });
-    };
 
     function getPosts() {
         $http.get(apiUrl)
@@ -29,8 +39,8 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
     }
 
     $scope.addPost = function () {
-        $http.post(apiUrl, { 
-            title: $scope.member.title, 
+        $http.post(apiUrl, {
+            title: $scope.member.title,
             body: $scope.member.body ,
             likes : 0 ,
             unlikes : 0 ,
@@ -44,10 +54,10 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
 
     $scope.editPost = function () {
         var id = $routeParams.id
-            $http.put(apiUrl, { 
-                id: id, 
-                title: $scope.member.title, 
-                body: $scope.member.body 
+            $http.put(apiUrl, {
+                id: id,
+                title: $scope.member.title,
+                body: $scope.member.body
             })
         .success(function() {
             window.location.href = '/';
@@ -56,7 +66,7 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
 
     $scope.AddLikes = function ( id , likes ) {
         var tmpApiUrl = UpdateLikesUrl + id ;
-        console.log( "run update likes" + tmpApiUrl ) ; 
+        console.log( "run update likes" + tmpApiUrl ) ;
         $http.put( tmpApiUrl, { id : id , likes : likes } )
             .success(function() {
                 getPosts();
@@ -65,7 +75,7 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
 
     $scope.AddUnLikes = function ( id , unlikes ) {
         var tmpApiUrl = UpdateUnLikesUrl + id ;
-        console.log( "run update likes" + tmpApiUrl ) ; 
+        console.log( "run update likes" + tmpApiUrl ) ;
         $http.put( tmpApiUrl, { id : id , unlikes : unlikes } )
             .success(function( ) {
                 getPosts();

@@ -8,7 +8,7 @@ function inputHandler (db) {
     var self = this;
 
     this.getPosts = function (req, res) {
-        console.log(self);
+        //console.log(self);
         var projection = {};
 
         posts.find({}, projection).toArray( function (err, result) {
@@ -16,7 +16,7 @@ function inputHandler (db) {
                 throw err; 
             }
             res.send(result);
-            console.log(result);
+//            console.log(result);
         });
     };
 

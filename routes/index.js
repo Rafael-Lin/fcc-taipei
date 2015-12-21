@@ -1,24 +1,33 @@
 'use strict';
 
 var Post = require('../schemas/post');
-var InputHandler = require(process.cwd() + '/app/controllers/inputhandler.server.js');
+var InputHandler = require(process.cwd() + '/controllers/inputhandler.server.js');
 
 module.exports = function(app, db, passport ) {
 
-    var inputHandler = new InputHandler(db);
+    var inputHandler = new InputHandler(db)
     var path = process.cwd();
 
     app.route('/').get(function(req, res) {
-        console.log("going to index : connection on '/'");
-        res.sendFile(process.cwd() + '/public/index.html');
+        res.sendFile(process.cwd() + '/public/views/index.html');
 
     });
-    //github
+    // route to test if the user is logged in or not 
+    app.get('/loggedin', function(req, res) { 
+        res.send(req.isAuthenticated() ? req.user : '0'); 
+    }); 
+
     app.route('/login')
         .get(function (req, res) {
+            console.log( "login function") ; 
             console.log( path ) ; 
-            res.sendFile(path + '/public/login.html');
+            res.sendFile(path + '/public/views/login.html');
         });  
+    app.route('/logout')
+        .get(function (req, res) {
+            req.logout();
+            res.redirect('/');
+        });
 
     app.route('/auth/github')
         .get(passport.authenticate('github'));
@@ -35,10 +44,6 @@ module.exports = function(app, db, passport ) {
             res.redirect('/login');
         }
     }
-    app.route('/profile')
-        .get(isLoggedIn, function (req, res) {
-            res.sendFile(path + '/public/profile.html');
-        });
 
     app.route('/api/user/:id')
         .get(isLoggedIn, function (req, res) {
@@ -46,7 +51,6 @@ module.exports = function(app, db, passport ) {
         });
 
 
-    //post
     app.route('/api/posts')
         .get(inputHandler.getPosts)
         .post(inputHandler.post)
