@@ -154,6 +154,18 @@ body {
 }
 .navItem {
     color : white ;
+    text-color : white ;
+}
+.nav-pic{
+    height:42px;
+    width: auto ;
+    margin-top: 4px;
+
+      border-radius : 50%;
+      border-color  : cornflowerblue;
+      border-width  : 2px;
+      border-style  : solid;
+
 }
 .navbar-brand{
     width:300;
@@ -672,14 +684,16 @@ img {
 
 .github-profile {
 	width: 350px;
-	height: 200px;
+	height: 300px;
 	border-radius: 3px;
-	margin: 86px auto 0 auto;
+	margin: 100px auto 0 auto;
+    padding-top: 30px ;
 	background-color: #EEE;
 	text-align: center;
 	color: #000;
 }
 
+/*
 .github-profile p:first-child {
 	padding-top: 16px;
 }
@@ -690,21 +704,29 @@ img {
 
 .github-profile p {
 	margin: 0 0 0 16px;
-	text-align: left;
+	text-align: center;
 }
 
 .profile-value {
 	font-weight: 400;
 }
+*/
+#profile-pic{
+    width : 150px ;
+    height: 150px ;
 
-span {
-	font-weight: 500;
+  border-radius : 50%;
+  border-color  : cornflowerblue;
+  border-width  : 5px;
+  border-style  : solid;
 }
 
+/*
 .github-profile > img {
 	padding-top: 16px;
 	margin-bottom: 16px;
 }
+*/
 
 .github-profile .menu:hover {
 	color: #FFA000;

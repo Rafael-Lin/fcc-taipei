@@ -10,17 +10,23 @@ module.exports = function(app, db, passport ) {
 
     app.route('/').get(function(req, res) {
         res.sendFile(process.cwd() + '/public/views/index.html');
-
     });
+
     // route to test if the user is logged in or not 
     app.get('/loggedin', function(req, res) { 
+        console.log(" check logged state") ;
+        console.log( req.user ) ;
+        //req.isAuthenticated() ? req.json( req.user.github ): req.send( '0' ) ;
         res.send(req.isAuthenticated() ? req.user : '0'); 
     }); 
 
+    app.route('/api/user/:id')
+        .get(isLoggedIn, function (req, res) {
+            res.json(req.user.github);
+        });
+
     app.route('/login')
         .get(function (req, res) {
-            console.log( "login function") ; 
-            console.log( path ) ; 
             res.sendFile(path + '/public/views/login.html');
         });  
     app.route('/logout')
@@ -37,18 +43,16 @@ module.exports = function(app, db, passport ) {
             successRedirect: '/',
             failureRedirect: '/login'
         }));
+
     function isLoggedIn (req, res, next) {
         if (req.isAuthenticated()) {
             return next();
         } else {
-            res.redirect('/login');
+            //res.redirect('/login');
+            res.send(401);
         }
     }
 
-    app.route('/api/user/:id')
-        .get(isLoggedIn, function (req, res) {
-            res.json(req.user.github);
-        });
 
 
     app.route('/api/posts')

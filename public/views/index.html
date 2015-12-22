@@ -29,17 +29,20 @@
           <a class="navbar-brand" href="https://www.facebook.com/groups/free.code.camp.taipei/">
             <img src="https://s3.amazonaws.com/freecodecamp/freecodecamp_logo.svg" alt="learn to code javascript at Free Code Camp logo" class="img-responsive nav-logo">
           </a>
-          <a class="navbar-brand" href="/"><sup>Taipei</sup></a>
+          <a class="navbar-brand" href="/">Taipei</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li ><a href="/login" class="navItem">Sign Up </a></li>
-            <li class="navItem"><a href="#/profile" ng-model="username">User Name </a></li>
+            <li ><a href="#/login" class="navItem">Sign Up </a></li>
+            <li class="navItem"><a href="#/profile" ng-model="username">{{ username}} </a></li>
+            <li class="navItem"><img ng-src="{{ userpicture}}" class="img-responsive nav-pic"></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
+    <!-- <h1>{{ username }}</h1> -->
+    <!-- <h2>{{ userpicture }}</h2> -->
     <div ng-view></div>
     <!-- <i class="material-icons goto-top">publish</i> -->
 

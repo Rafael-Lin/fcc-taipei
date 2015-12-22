@@ -1,9 +1,62 @@
 var myApp = angular.module('myApp', ['ngRoute', 'ngResource']);
 
-myApp.config(function($routeProvider) {
+myApp.config(function($routeProvider, $locationProvider, $httpProvider ) {
+
+    $httpProvider.interceptors.push(function($q, $location) {
+      return {
+        response: function(response) {
+          return response;
+        },
+        responseError: function(response) {
+          if (response.status === 401)
+            $location.url('/login');
+          return $q.reject(response);
+        }
+      };
+    });
+
+    var checkLoggedin = function($q, $timeout, $http, $location, $rootScope ){
+      // Initialize a new promise
+      var deferred = $q.defer();
+      var mUsername = "" ;
+      var mUserpicture= "" ;
+
+      // Make an AJAX call to check if the user is logged in
+      $http.get('/loggedin').success(function(user){
+        // Authenticated
+        if (user !== '0'){
+            console.log( "authed" ) ;
+            console.log( user ) ;
+            mUsername = user.github.displayName ;
+            mUserpicture = user.github.pictureUrl ;
+            // $provide.provider('username', function() { return mUsername; });
+            // $provide.provider('userpicture', function() { return mUserpicture; });
+            $rootScope.username = mUsername ;
+            $rootScope.userpicture = mUserpicture ;
+            deferred.resolve();
+
+        // Not Authenticated
+        }else {
+          $rootScope.username = 'You need to log in.';
+          //$timeout(function(){deferred.reject();}, 0);
+          deferred.reject();
+          $location.url('/login');
+        }
+      });
+
+      return deferred.promise;
+    };
+
     $routeProvider.when('/', {
         controller: 'MainCtrl',
-        templateUrl: '/public/views/post.html'
+        templateUrl: '/public/views/post.html',
+        resolve: {
+          loggedin: checkLoggedin
+        }
+    })
+    .when('/login', {
+        templateUrl: '/public/views/login.html',
+        controller: 'MainCtrl'
     })
     .when('/edit/:id', {
         controller: 'MainCtrl',
@@ -18,12 +71,11 @@ myApp.config(function($routeProvider) {
     });
 });
 
-myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams) {
+myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams, $rootScope ) {
 
     var apiUrl = '/api/posts';
     var UpdateLikesUrl = '/api/post/';
     var UpdateUnLikesUrl = '/api/postUnLikes/';
-    $scope.username = "unknown" ;
 
     function getPosts() {
         $http.get(apiUrl)
