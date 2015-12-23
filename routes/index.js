@@ -62,8 +62,6 @@ module.exports = function(app, db, passport ) {
         }
     }
 
-
-
     app.route('/api/posts')
         .get(inputHandler.getPosts)
         .post(inputHandler.post)

@@ -16,10 +16,8 @@ myApp.config(function($routeProvider, $locationProvider, $httpProvider ) {
     });
 
     var checkLoggedin = function($q, $timeout, $http, $location, $rootScope ){
-      // Initialize a new promise
+
       var deferred = $q.defer();
-      var mUsername = "" ;
-      var mUserpicture= "" ;
 
       // Make an AJAX call to check if the user is logged in
       $http.get('/loggedin').success(function(user){
@@ -27,12 +25,11 @@ myApp.config(function($routeProvider, $locationProvider, $httpProvider ) {
         if (user !== '0'){
             console.log( "authed" ) ;
             console.log( user ) ;
-            mUsername = user.github.displayName ;
-            mUserpicture = user.github.pictureUrl ;
             // $provide.provider('username', function() { return mUsername; });
             // $provide.provider('userpicture', function() { return mUserpicture; });
-            $rootScope.username = mUsername ;
-            $rootScope.userpicture = mUserpicture ;
+            $rootScope.username = user.github.displayName ;
+            $rootScope.userpicture = user.github.pictureUrl ;
+            $rootScope.userMail = user.github.pictureUrl ;
             deferred.resolve();
 
         // Not Authenticated
@@ -85,8 +82,12 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams, $r
                     post.order = post.date.getTime();
                     post.likes = post.likes ;
                     post.unlikes = post.unlikes ;
+                    post.authorName = post.authorName ;
+                    post.authorPicture = post.authorPic ;
+                    post.authorMail = post.authorMail ;
                 });
                 $scope.posts = response;
+                console.log( $scope.posts ) ;
             });
     }
 
@@ -96,6 +97,9 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams, $r
             body: $scope.member.body ,
             likes : 0 ,
             unlikes : 0 ,
+            authorMail : $rootScope.userMail,
+            authorName : $rootScope.username,
+            authorPicture : $rootScope.userpicture,
         })
         .success(function() {
             getPosts();

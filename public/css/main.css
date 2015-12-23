@@ -156,16 +156,22 @@ body {
     color : white ;
     text-color : white ;
 }
-.nav-pic{
+.post-author-pic{
     height:42px;
     width: auto ;
-    margin-top: 4px;
-
       border-radius : 50%;
       border-color  : cornflowerblue;
       border-width  : 2px;
       border-style  : solid;
-
+}
+.nav-pic{
+    height:42px;
+    width: auto ;
+    margin-top: 4px;
+      border-radius : 50%;
+      border-color  : cornflowerblue;
+      border-width  : 2px;
+      border-style  : solid;
 }
 .navbar-brand{
     width:300;

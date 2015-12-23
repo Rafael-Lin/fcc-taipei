@@ -8,7 +8,6 @@ function inputHandler (db) {
     var self = this;
 
     this.getPosts = function (req, res) {
-        //console.log(self);
         var projection = {};
 
         posts.find({}, projection).toArray( function (err, result) {
@@ -16,7 +15,6 @@ function inputHandler (db) {
                 throw err; 
             }
             res.send(result);
-//            console.log(result);
         });
     };
 
@@ -27,7 +25,6 @@ function inputHandler (db) {
             if (err) { 
                 throw err; 
             }
-
             res.send(result);
             console.log(result);
         });
@@ -39,12 +36,14 @@ function inputHandler (db) {
         req.on('data', function(data) {
             var record = {};
             data = JSON.parse(data);
-            console.log( " insert " + data);
             record.body = data.body;
             record.title = data.title;
             record.date = new Date();
             record.likes = 0 ;
             record.unlikes = 0 ;
+            record.authorMail = data.authorMail;
+            record.authorName = data.authorName;
+            record.authorPic =  data.authorPicture ;
             posts.insert(record);
         }).setEncoding("utf8");
 

@@ -10,7 +10,6 @@ var User = new Schema({
         username: String,
         pictureUrl : String ,
         email : String ,
-        publicRepos: Number,
     },
 });
 

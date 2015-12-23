@@ -13,6 +13,15 @@ var Post = module.exports = new mongoose.Schema({
           type: String,
           required: true
     },
+    authorMail: {
+          type: String,
+    },
+    authorName: {
+          type: String,
+    },
+    authorPic: {
+          type: String,
+    },
     date: {
           type: Date,
           default: Date.now

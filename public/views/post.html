@@ -10,6 +10,7 @@
         <section class="post-content">
           <span class="post-num">#{{$index + 1}}</span>
           <i class="material-icons ts">account_circle</i>
+          <img ng-src="{{ post.authorPicture }}" class="img-responsive post-author-pic">
           <h2 class="fcc-username ts">{{ post.name }}</h2>
           <button ng-click="deletePost(post._id)">Delete</button>
           <button><a href="#/edit/{{post._id}}">Edit</a></button>
@@ -21,24 +22,6 @@
             <li class="thumb" ng-click="AddUnLikes(post._id, post.unlikes)"><i class="material-icons active">thumb_down</i> {{post.unlikes}} </li>
             <li class="thumb" ng-click="AddLikes(post._id, post.likes)"><i class="material-icons">thumb_up</i> {{post.likes}}</li>
           </ul>
-
-          <!-- unused -->
-          <!-- <ul class="post-content-reply"> -->
-          <!--   <li class="" ng-repeat="reply in member.replies | orderBy: -postTime"> -->
-          <!--     <section class="post-content"> -->
-          <!--       <i class="material-icons ts">account_circle</i> -->
-          <!--       <h2 class="fcc-username ts">{{ reply.name }}</h2> -->
-
-          <!--       <div class="post-date">2015/11/08</div> -->
-          <!--       <p class="post-paragraph">{{ reply.body }}</p> -->
-
-          <!--       <ul class="tool-bar cf"> -->
-          <!--         <li class="thumb"><i class="material-icons">thumb_down</i>1</li> -->
-          <!--         <li class="thumb"><i class="material-icons">thumb_up</i>910</li> -->
-          <!--       </ul> -->              
-          <!--     </section> -->
-          <!--   </li> -->
-          <!-- </ul> -->
 
         </section> 
       </article> <!--[end] msg-content-->
