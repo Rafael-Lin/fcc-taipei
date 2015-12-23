@@ -1,6 +1,7 @@
 'use strict';
 
 var GitHubStrategy = require('passport-github').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('../schemas/user');
 var configAuth = require('./auth');
 
@@ -29,12 +30,54 @@ module.exports = function (passport) {
         });
     });
 
+    passport.use(new FacebookStrategy({
+        clientID: configAuth.facebookAuth.clientID,
+        clientSecret: configAuth.facebookAuth.clientSecret,
+        callbackURL: configAuth.facebookAuth.callbackURL,
+        profileFields : ['id', 'displayName', 'emails','photos']
+    },
+    function (token, refreshToken, profile, done) {
+        process.nextTick(function () {
+            User.findOne({ 'github.id': profile.id }, function (err, user) {
+                if (err) {
+                    console.log("find one error"); 
+                    return done(err);
+                }
+
+                if (user) {
+                    return done(null, user);
+                } else {
+                    var newUser = new User();
+                    console.log( "facebook") ;
+                    console.log( profile ) ;
+                    newUser.github.id = profile.id;
+                    newUser.github.username = profile.username;
+                    newUser.github.displayName = profile.displayName;
+
+                    newUser.github.publicRepos ="" ; 
+                    newUser.github.pictureUrl = profile.photos[0].value ;
+                    newUser.github.email = profile.emails[0].value ;
+
+                    newUser.save(function (err) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
+    }));
+
     passport.use(new GitHubStrategy({
         clientID: configAuth.githubAuth.clientID,
         clientSecret: configAuth.githubAuth.clientSecret,
         callbackURL: configAuth.githubAuth.callbackURL
     },
     function (token, refreshToken, profile, done) {
+        console.log("github");
+        console.log( profile ) ;
         process.nextTick(function () {
             User.findOne({ 'github.id': profile.id }, function (err, user) {
                 if (err) {
@@ -51,7 +94,7 @@ module.exports = function (passport) {
                     newUser.github.displayName = profile.displayName;
                     newUser.github.publicRepos = profile._json.public_repos;
                     newUser.github.pictureUrl = profile._json.avatar_url ;
-                    console.log( newUser.github.pictureUrl ) ;
+                    newUser.github.email = profile.emails[0].value;
 
                     newUser.save(function (err) {
                         if (err) {

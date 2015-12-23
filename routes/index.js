@@ -44,6 +44,15 @@ module.exports = function(app, db, passport ) {
             failureRedirect: '/login'
         }));
 
+    app.route('/auth/facebook')
+        .get(passport.authenticate('facebook'));
+
+    app.route('/auth/facebook/callback')
+        .get(passport.authenticate('facebook', {
+            successRedirect: '/',
+            failureRedirect: '/login'
+        }));
+
     function isLoggedIn (req, res, next) {
         if (req.isAuthenticated()) {
             return next();
