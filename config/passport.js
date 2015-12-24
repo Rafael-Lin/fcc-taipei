@@ -49,14 +49,11 @@ module.exports = function (passport) {
                 } else {
                     var newUser = new User();
                     console.log( "facebook") ;
-                    console.log( profile ) ;
-                    newUser.github.id = profile.id;
-                    newUser.github.username = profile.username;
+                    newUser.github.id          = profile.id;
+                    newUser.github.username    = profile.username;
                     newUser.github.displayName = profile.displayName;
-
-                    newUser.github.publicRepos ="" ; 
-                    newUser.github.pictureUrl = profile.photos[0].value ;
-                    newUser.github.email = profile.emails[0].value ;
+                    newUser.github.pictureUrl  = profile.photos[0].value ;
+                    newUser.github.email       = profile.emails[0].value ;
 
                     newUser.save(function (err) {
                         if (err) {
@@ -89,12 +86,11 @@ module.exports = function (passport) {
                     return done(null, user);
                 } else {
                     var newUser = new User();
-                    newUser.github.id = profile.id;
-                    newUser.github.username = profile.username;
+                    newUser.github.id          = profile.id;
+                    newUser.github.username    = profile.username;
                     newUser.github.displayName = profile.displayName;
-                    newUser.github.publicRepos = profile._json.public_repos;
-                    newUser.github.pictureUrl = profile._json.avatar_url ;
-                    newUser.github.email = profile.emails[0].value;
+                    newUser.github.pictureUrl  = profile._json.avatar_url ;
+                    newUser.github.email       = profile.emails[0].value;
 
                     newUser.save(function (err) {
                         if (err) {
