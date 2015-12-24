@@ -7,6 +7,7 @@ body {
     margin: 0;
     padding: 0;
 }
+*/
 header {
     color: #00BCD4;
     height: 56px;
@@ -86,7 +87,6 @@ img {
 }
 
 
-*/
 .clementine-text { 
     padding: 0;
     margin: -25px 0 0 0;
@@ -232,9 +232,10 @@ body{
     background:rgba(45,45,45,1);
     background:#ff8e11;
     background:#EDC466;
+    background:rgba(45,45,45,1);
      */
-background:rgba(45,45,45,1);
-position:absolute;
+    background:#00A0B0;
+    position:absolute;
 }
 .article-headline{
     margin-bottom:10px;
