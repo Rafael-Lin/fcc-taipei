@@ -45,21 +45,16 @@
     <div class="meta row">
       <div class="col-md-4">
         <!--Picture-->
-        <img class="post-author-pic" ng-src="{{ post.authorPicture}}">
-        <!-- Date-->
+        <img ng-src="{{ post.authorPicture}}">
       </div>
-      <div class="col-md-8">
+      <div class="col-md-6">
         <p class="meta-date text-right"> {{post.authorName}}</p>
         <p class="meta-date text-right">  @{{ToDate(post.order)}}</p>
       </div>
     </div>
     <div class="meta row">
-      <!-- <div class="col-xs-12 col-md-12"> -->
-        <!--Upvotes-->
-        <!-- <div class="row"> -->
-
           <div class="col-md-4">
-            <p class="meta-date text-left" ng-click="deletePost(post._id)">Delete</p> 
+            <p class="meta-date text-left meta-delete" ng-click="deletePost(post._id)">Delete</p> 
             <a class="meta-date text-right" href="#/edit/{{post._id}}">Edit</a>
           </div>
 
@@ -69,8 +64,6 @@
           <div class="col-md-4" ng-click="AddLikes(post._id, post.likes, post )">
             <i class="material-icons">thumb_up</i> {{post.likes}}
           </div>
-        <!-- </div> -->
-      <!-- </div> -->
     </div>
   </div>
 
