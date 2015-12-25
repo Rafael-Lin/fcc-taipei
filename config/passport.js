@@ -90,7 +90,7 @@ module.exports = function (passport) {
                     newUser.github.username    = profile.username;
                     newUser.github.displayName = profile.displayName;
                     newUser.github.pictureUrl  = profile._json.avatar_url ;
-                    newUser.github.email       = profile.emails[0].value;
+                    newUser.github.email       = "" ;// profile.emails[0].value;
 
                     newUser.save(function (err) {
                         if (err) {
