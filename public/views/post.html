@@ -35,7 +35,7 @@
     <div class="article-banner"></div>
 
     <!--Headline & content-->
-    <a href="/">
+    <a href="/#/">
       <h1 class="article-headline">{{ post.title }}</h1>
       <p>{{ post.body}}</p>
     </a>
@@ -43,27 +43,34 @@
     <!--Meta / Author Info-->
     <hr>
     <div class="meta row">
-      <div class="col-xs-12 col-md-12">
+      <div class="col-md-4">
         <!--Picture-->
-        <a href="/#">
-          <img class="post-author-pic" ng-src="{{ post.authorPicture}}">
-        </a>
+        <img class="post-author-pic" ng-src="{{ post.authorPicture}}">
         <!-- Date-->
-        <p class="meta-date text-left">{{ToDate(post.order)}}</p>
+      </div>
+      <div class="col-md-8">
+        <p class="meta-date text-right"> {{post.authorName}}</p>
+        <p class="meta-date text-right">  @{{ToDate(post.order)}}</p>
       </div>
     </div>
     <div class="meta row">
-      <div class="col-xs-12 col-md-12">
+      <!-- <div class="col-xs-12 col-md-12"> -->
         <!--Upvotes-->
-        <div class="row">
-          <div class="thumb col-md-6" ng-click="AddUnLikes(post._id, post.unlikes, post )">
+        <!-- <div class="row"> -->
+
+          <div class="col-md-4">
+            <p class="meta-date text-left" ng-click="deletePost(post._id)">Delete</p> 
+            <a class="meta-date text-right" href="#/edit/{{post._id}}">Edit</a>
+          </div>
+
+          <div class="col-md-4" ng-click="AddUnLikes(post._id, post.unlikes, post )">
             <i class="material-icons ">thumb_down</i> {{post.unlikes}} 
           </div>
-          <div class="thumb col-md-6" ng-click="AddLikes(post._id, post.likes, post )">
+          <div class="col-md-4" ng-click="AddLikes(post._id, post.likes, post )">
             <i class="material-icons">thumb_up</i> {{post.likes}}
           </div>
-        </div>
-      </div>
+        <!-- </div> -->
+      <!-- </div> -->
     </div>
   </div>
 
