@@ -12,13 +12,13 @@ module.exports = function(app, db, passport ) {
         res.sendFile(process.cwd() + '/public/views/index.html');
     });
 
-    // route to test if the user is logged in or not 
-    app.get('/loggedin', function(req, res) { 
+    // route to test if the user is logged in or not
+    app.get('/loggedin', function(req, res) {
         console.log(" check logged state") ;
         console.log( req.user ) ;
         //req.isAuthenticated() ? req.json( req.user.github ): req.send( '0' ) ;
-        res.send(req.isAuthenticated() ? req.user : '0'); 
-    }); 
+        res.send(req.isAuthenticated() ? req.user : '0');
+    });
 
     app.route('/api/user/:id')
         .get(isLoggedIn, function (req, res) {
@@ -28,7 +28,7 @@ module.exports = function(app, db, passport ) {
     app.route('/login')
         .get(function (req, res) {
             res.sendFile(path + '/public/views/login.html');
-        });  
+        });
     app.route('/logout')
         .get(function (req, res) {
             req.logout();
@@ -40,6 +40,15 @@ module.exports = function(app, db, passport ) {
 
     app.route('/auth/github/callback')
         .get(passport.authenticate('github', {
+            successRedirect: '/',
+            failureRedirect: '/login'
+        }));
+
+    app.route('/auth/twitter')
+        .get(passport.authenticate('twitter'));
+
+    app.route('/auth/twitter/callback')
+        .get(passport.authenticate('twitter', {
             successRedirect: '/',
             failureRedirect: '/login'
         }));
@@ -68,7 +77,7 @@ module.exports = function(app, db, passport ) {
         .put(inputHandler.editPost)
         .delete(inputHandler.removePost);
 
-    app.get('/api/edit/:id', inputHandler.getPost);           
+    app.get('/api/edit/:id', inputHandler.getPost);
 
     //update likes
     app.route('/api/post/:id')

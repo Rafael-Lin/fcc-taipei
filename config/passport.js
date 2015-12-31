@@ -1,9 +1,10 @@
 'use strict';
 
-var GitHubStrategy = require('passport-github').Strategy;
+var GitHubStrategy   = require('passport-github').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-var User = require('../schemas/user');
-var configAuth = require('./auth');
+var TwitterStrategy  = require('passport-twitter').Strategy;
+var User             = require('../schemas/user');
+var configAuth       = require('./auth');
 
 module.exports = function (passport) {
 
@@ -31,16 +32,16 @@ module.exports = function (passport) {
     });
 
     passport.use(new FacebookStrategy({
-        clientID: configAuth.facebookAuth.clientID,
-        clientSecret: configAuth.facebookAuth.clientSecret,
-        callbackURL: configAuth.facebookAuth.callbackURL,
+        clientID     : configAuth.facebookAuth.clientID,
+        clientSecret : configAuth.facebookAuth.clientSecret,
+        callbackURL  : configAuth.facebookAuth.callbackURL,
         profileFields : ['id', 'displayName', 'emails','photos']
     },
     function (token, refreshToken, profile, done) {
         process.nextTick(function () {
             User.findOne({ 'github.id': profile.id }, function (err, user) {
                 if (err) {
-                    console.log("find one error"); 
+                    console.log("find one error");
                     return done(err);
                 }
 
@@ -68,9 +69,9 @@ module.exports = function (passport) {
     }));
 
     passport.use(new GitHubStrategy({
-        clientID: configAuth.githubAuth.clientID,
-        clientSecret: configAuth.githubAuth.clientSecret,
-        callbackURL: configAuth.githubAuth.callbackURL
+        clientID     : configAuth.githubAuth.clientID,
+        clientSecret : configAuth.githubAuth.clientSecret,
+        callbackURL  : configAuth.githubAuth.callbackURL
     },
     function (token, refreshToken, profile, done) {
         console.log("github");
@@ -78,7 +79,7 @@ module.exports = function (passport) {
         process.nextTick(function () {
             User.findOne({ 'github.id': profile.id }, function (err, user) {
                 if (err) {
-                    console.log("find one error"); 
+                    console.log("find one error");
                     return done(err);
                 }
 
@@ -97,6 +98,43 @@ module.exports = function (passport) {
                             throw err;
                         }
 
+                        return done(null, newUser);
+                    });
+                }
+            });
+        });
+    }));
+
+
+    passport.use(new TwitterStrategy({
+        consumerKey: configAuth.twitterAuth.consumerKey,
+        consumerSecret: configAuth.twitterAuth.consumerSecret,
+        callbackURL  : configAuth.twitterAuth.callbackURL
+    },
+    function (token, refreshToken, profile, done) {
+        console.log("twitter");
+        console.log( profile ) ;
+        process.nextTick(function () {
+            User.findOne({ 'github.id': profile.id }, function (err, user) {
+                if (err) {
+                    console.log("find one error");
+                    return done(err);
+                }
+
+                if (user) {
+                    return done(null, user);
+                } else {
+                    var newUser = new User();
+                    newUser.github.id          = profile.id;
+                    newUser.github.username    = profile.username;
+                    newUser.github.displayName = profile.displayName;
+                    newUser.github.pictureUrl  = profile.photos[0].value;
+                    newUser.github.email       = "" ;// profile.emails[0].value;
+
+                    newUser.save(function (err) {
+                        if (err) {
+                            throw err;
+                        }
                         return done(null, newUser);
                     });
                 }
