@@ -132,9 +132,9 @@ myApp.controller('MainCtrl', function($scope, $http, $location, $routeParams, $r
     $scope.isCurrentAuthor = function( thispost ){
         if( thispost.authorName == $rootScope.username)
             return true ;
-        else 
+        else
             return false ;
-        
+
     };
     $scope.editPost = function () {
         var id = $routeParams.id
